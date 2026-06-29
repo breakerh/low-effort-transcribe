@@ -1,0 +1,41 @@
+[package]
+name = "transcribe"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "transcribe"
+path = "src/lib.rs"
+
+[[bin]]
+name = "transcribe"
+path = "src/bin/transcribe.rs"
+
+[[bin]]
+name = "transcribe-gui"
+path = "src/bin/transcribe-gui.rs"
+required-features = ["gui"]
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+walkdir = "2"
+symphonia = { version = "0.5", features = ["mp3", "isomp4", "aac"] }
+rubato = "0.15"
+whisper-rs = "0.13"
+ureq = "2"
+indicatif = "0.17"
+dirs = "5"
+eframe = { version = "0.29", optional = true, default-features = false, features = ["default_fonts", "glow", "wayland", "x11"] }
+rfd = { version = "0.15", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_System_Console"] }
+
+[features]
+default = []
+metal = ["whisper-rs/metal"]
+gui = ["dep:eframe", "dep:rfd"]
+
+[profile.release]
+opt-level = 3

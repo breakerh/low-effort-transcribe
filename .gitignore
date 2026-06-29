@@ -1,0 +1,19 @@
+# Rust build artifacts
+/target
+
+# macOS
+.DS_Store
+
+# Local media (test inputs)
+*.wav
+*.mp3
+*.mp4
+
+# Tool output (transcripts live next to their source media)
+*.txt
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*~
